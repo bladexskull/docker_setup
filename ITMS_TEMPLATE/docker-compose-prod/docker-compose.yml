@@ -11,9 +11,9 @@ services:
   ms_vehicle:
     build:
       context: .
-    volumes:
-      - ".:/MicroService_rahul"
-      - /MicroService_rahul/node_modules
+    # volumes:
+      # - ".:/MicroService_rahul"
+      # - /MicroService_rahul/node_modules
     expose:
       - "8014"
     restart: always
@@ -23,32 +23,21 @@ services:
   ms_trip:
     build:
       context: .
-    volumes:
-      - ".:/MicroService_rahul"
-      - /MicroService_rahul/node_modules
+    # volumes:
+      # - ".:/MicroService_rahul"
+      # - /MicroService_rahul/node_modules
     expose:
       - "8015"
     restart: always
     ports:
-      - "8015:8015"
+      - "8018-8020:8015"
     command: node MS_TRIP/ms_trip.js
-  ms_repeat:
-    build: .
-      context: .
-    volumes:
-      - ".:/MicroService_rahul"
-      - /MicroService_rahul/node_modules
-    restart: always
-    expose:
-      - "8016"
-    ports:
-      - "8016:8016"
   ms_driver:
     build:
       context: .
-    volumes:
-      - ".:/MicroService_rahul"
-      - /MicroService_rahul/node_modules
+    # volumes:
+      # - ".:/MicroService_rahul"
+      # - /MicroService_rahul/node_modules
     expose:
       - "8013"
     ports:
@@ -57,13 +46,14 @@ services:
   Disp360_front_end:
     build:
       context: .
+      dockerfile: Dockerfile.prod
     volumes:
       - ".:/app"
       - /app/node_modules
     expose:
-      - "443"
+      - ""
     ports:
-      - "443:443"
+      - ""
   Disp360_back_end:
     build:
       context: .
