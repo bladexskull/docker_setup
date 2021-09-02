@@ -1,0 +1,49 @@
+version: '3'
+services:
+  custom-redis:
+    build: 
+      context: .
+    expose: 
+      - "6379"
+    ports: 
+      - "6379:6381:6379"
+  ms_vehicle:
+    build: 
+      context: .
+    volumes: 
+      - ".:/MicroService_rahul"
+      - /MicroService_rahul/node_modules
+    expose:
+      - "8014" 
+    ports: 
+      - "8014:8014"
+    command: node MS_VEHICLE/ms_vehicle.js
+  ms_trip:
+    build:
+      context: .
+    volumes: 
+      - ".:/MicroService_rahul"
+      - /MicroService_rahul/node_modules
+    expose: 
+      - "8015"
+    restart: always
+    ports: 
+      - "8018-8020:8015"
+    command: node MS_TRIP/ms_trip.js
+  ms_driver:
+    build:
+      context: .
+    volumes: 
+      - ".:/MicroService_rahul"
+      - /MicroService_rahul/node_modules
+    expose:
+      - "8013"
+    # ports: 
+      # - "8013:8013"
+    command: node MS_DRIVER/ms_driver.js
+  
+
+ 
+
+  
+      
